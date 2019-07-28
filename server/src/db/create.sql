@@ -1,3 +1,3 @@
-CREATE DATABASE krausen_prod;
-CREATE DATABASE krausen_dev;
-CREATE DATABASE krausen_test;
+CREATE DATABASE prod;
+CREATE DATABASE dev;
+CREATE DATABASE test;
