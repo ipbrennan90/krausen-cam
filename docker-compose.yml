@@ -6,7 +6,13 @@ services:
     volumes:
       - ./server:/usr/src/app
     ports:
-      - 5001:80
+      - 5001:5000
+    environment:
+      - FLASK_APP=src/__init__.py
+      - FLASK_ENV=development
+      - APP_SETTINGS=src.config.DevelopmentConfig
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/dev
+      - DATABASE_TEST_URL=postgres://postgres:postgres@db:5432/test
 
   client-service:
     build: ./client
@@ -16,3 +22,12 @@ services:
       - 5000:80
     depends_on:
       - server-service
+  db: # new
+    build:
+      context: ./server/src/db
+      dockerfile: Dockerfile
+    ports:
+      - 5435:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
